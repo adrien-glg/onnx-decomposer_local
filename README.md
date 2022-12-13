@@ -1,6 +1,6 @@
 # onnx-decomposer
 
-From `onnx-decomposer` directory, run the following:
+From `root`, run the following:
 ```bash
 export PYTHONPATH=$PYTHONPATH:"$PWD":"$PWD/src"
 cd src

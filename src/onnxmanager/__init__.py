@@ -1,6 +1,3 @@
-import os
-import onnx
-
 from src import constants
 
 MODEL_PATH = "../models/" + constants.PROJECT_NAME + "/" + constants.ONNX_MODEL

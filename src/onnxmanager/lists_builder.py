@@ -1,3 +1,5 @@
+import os
+
 import onnx
 
 from src import onnxmanager

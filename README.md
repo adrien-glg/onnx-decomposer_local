@@ -7,7 +7,7 @@ Install requirements:
 pip install -r requirements.txt
 ```
 
-From `onnx-decomposer` directory, run the following:
+From `root`, run the following:
 ```bash
 export PYTHONPATH=$PYTHONPATH:"$PWD":"$PWD/src"
 cd src

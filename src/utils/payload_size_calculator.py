@@ -1,15 +1,6 @@
 import os.path
 
 from src import onnxmanager
-from src.onnxmanager import model_extractor
-
-
-# calculate file size in KB, MB, GB
-def convert_bytes(size):
-    for unit in ['bytes', 'KB', 'MB', 'GB', 'TB']:
-        if size < 1024.0:
-            return "%3.1f %s" % (size, unit)
-        size /= 1024.0
 
 
 def get_payloads_sizes(outputs):
@@ -26,16 +17,6 @@ def get_payloads_sizes(outputs):
         payloads_sizes_per_slice += [slice_payload_size]
 
     return payloads_sizes_per_slice
-
-
-def get_pretty_payloads_sizes(outputs):
-    pretty_payloads_sizes = []
-    payloads_sizes = get_payloads_sizes(outputs)
-
-    for slice_index in range(len(payloads_sizes)):
-        pretty_payloads_sizes += [convert_bytes(payloads_sizes[slice_index])]
-
-    return pretty_payloads_sizes
 
 
 # f_size = os.path.getsize('../data/payload0.json')

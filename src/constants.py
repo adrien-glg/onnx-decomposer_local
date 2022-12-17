@@ -14,4 +14,4 @@ OUTPUT_LIST_END = ["TFLite_Detection_PostProcess", "TFLite_Detection_PostProcess
 # OUTPUT_LIST_END = ['detections:0']
 
 # For mobiledet, it fails for number of slices = 17, 19, (did not check more)
-NUMBER_OF_SLICES = 10
+NUMBER_OF_SLICES = 2

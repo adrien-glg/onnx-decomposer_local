@@ -2,6 +2,7 @@
 models/*/slices/
 data/
 .idea/
+src/aws/packages/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

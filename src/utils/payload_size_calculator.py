@@ -7,9 +7,9 @@ def get_payloads_sizes(outputs):
     payloads_sizes_per_slice = []
     payload_counter = 0
 
-    for slice_index in range(len(outputs)):
+    for slice_index in range(len(outputs) - 1):
         slice_payload_size = 0
-        for payload_index in range(len(outputs[slice_index])):
+        for i in range(len(outputs[slice_index])):
             payload_path = os.path.splitext(onnxmanager.JSON_PAYLOAD_PATH)[0] + str(payload_counter) + os.path.splitext(onnxmanager.JSON_PAYLOAD_PATH)[1]
             payload_size = os.path.getsize(payload_path)
             slice_payload_size += payload_size

@@ -22,12 +22,24 @@ if __name__ == '__main__':
 
     outputs = model_refactorer.refactor_slices(inputs, outputs)
 
+    for i in range(len(outputs)):
+        print("__________________")
+        for j in range(len(outputs[i])):
+            print(outputs[i][j])
+
+    slice_index = 0
+    next_payload_index = 0
+    in_out_event = lists_builder.make_event(slice_index, next_payload_index, inputs, outputs)
+
     # MOBILEDET:
     mobiledet_first_slice.run(outputs)
     print("Slice 0 execution completed successfully")
 
+    next_payload_index = json_manager.get_next_payload_index()
+
     for slice_index in range(1, constants.NUMBER_OF_SLICES):
-        other_slices.run(slice_index, inputs, outputs)
+        other_slices.run(slice_index, next_payload_index, inputs, outputs)
+        next_payload_index = json_manager.get_next_payload_index()
         print("Slice " + str(slice_index) + " execution completed successfully")
 
     result = json_manager.get_payload_content("TFLite_Detection_PostProcess")
@@ -48,7 +60,7 @@ if __name__ == '__main__':
     # END EFFICIENTDET
 
     # PAYLOADS SIZES
-    print("\nPAYLOADS_SIZES:")
+    print("\nVIRTUAL PAYLOADS SIZES PER SLICE:")
     payloads_sizes = payload_size_calculator.get_payloads_sizes(outputs)
     print(payloads_sizes)
 
@@ -56,7 +68,7 @@ if __name__ == '__main__':
     print(pretty_payloads_sizes)
 
     # PACKAGES SIZES
-    print("\nPACKAGES_SIZES:")
+    print("\nPACKAGES SIZES:")
     packages_sizes = package_size_calculator.get_packages_sizes()
     print(packages_sizes)
 

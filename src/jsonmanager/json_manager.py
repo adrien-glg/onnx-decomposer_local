@@ -3,18 +3,32 @@ import os
 
 from src import onnxmanager
 
-FILES_COUNTER = 0
-DICT_INIT_COMPLETED = False
+next_payload_index = 0
+dict_init_completed = False
+payloads_paths = []
+
+
+def get_next_payload_index():
+    return next_payload_index
+
+
+def set_next_payload_index(new_next_payload_index):
+    global next_payload_index
+    next_payload_index = new_next_payload_index
+
+
+def get_payloads_paths():
+    return payloads_paths
 
 
 def init_dictionary():
-    global DICT_INIT_COMPLETED
+    global dict_init_completed
     os.mkdir(onnxmanager.JSON_ROOT_PATH)
     init_data = json.dumps({})
     with open(onnxmanager.DICTIONARY_PATH, 'w') as outfile:
         outfile.write(init_data)
         outfile.close()
-    DICT_INIT_COMPLETED = True
+    dict_init_completed = True
 
 
 # key: output name
@@ -29,15 +43,18 @@ def update_dictionary(key, value):
 
 
 def get_new_filepath():
-    global FILES_COUNTER
-    new_filepath = os.path.splitext(onnxmanager.JSON_PAYLOAD_PATH)[0] + str(FILES_COUNTER) + os.path.splitext(onnxmanager.JSON_PAYLOAD_PATH)[1]
-    FILES_COUNTER += 1
+    global next_payload_index
+    global payloads_paths
+    new_filepath = os.path.splitext(onnxmanager.JSON_PAYLOAD_PATH)[0] + str(next_payload_index) + \
+        os.path.splitext(onnxmanager.JSON_PAYLOAD_PATH)[1]
+    next_payload_index += 1
+    payloads_paths += [new_filepath]
     return new_filepath
 
 
 def payload_to_jsonfile(key, data):
-    global DICT_INIT_COMPLETED
-    if not DICT_INIT_COMPLETED:
+    global dict_init_completed
+    if not dict_init_completed:
         init_dictionary()
 
     data = data.tolist()

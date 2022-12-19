@@ -81,6 +81,6 @@ def build_lists():
     return input_lists, output_lists
 
 
-def make_event(input_lists, output_lists):
-    event = {"input_lists": input_lists, "output_lists": output_lists}
+def make_event(slice_index, next_payload_index, input_lists, output_lists):
+    event = {"next_slice_index": slice_index, "next_payload_index": next_payload_index, "inputs": input_lists, "outputs": output_lists}
     return event

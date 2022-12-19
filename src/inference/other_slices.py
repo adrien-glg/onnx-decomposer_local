@@ -27,8 +27,10 @@ def get_results(slice_index, input_lists):
     return results
 
 
-def run(slice_index, input_lists, output_lists):
+def run(slice_index, next_payload_index, input_lists, output_lists):
     results = get_results(slice_index, input_lists)
+
+    json_manager.set_next_payload_index(next_payload_index)
 
     for i in range(len(results)):
         result = results[i]

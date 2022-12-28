@@ -3,10 +3,10 @@ models/*/slices/
 data/
 .idea/
 src/aws/
-!src/aws/lambda_functions/mobiledet/mobiledet_lambda.py
-!src/aws/lambda_functions/mobiledet/src/inference/__init__.py
-!src/aws/lambda_functions/mobiledet/src/onnxmanager/__init__.py
-!src/aws/lambda_functions/mobiledet/src/jsonmanager/__init__.py
+!src/aws/lambda_code/mobiledet/mobiledet_lambda.py
+!src/aws/lambda_code/mobiledet/src/inference/__init__.py
+!src/aws/lambda_code/mobiledet/src/onnxmanager/__init__.py
+!src/aws/lambda_code/mobiledet/src/jsonmanager/__init__.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

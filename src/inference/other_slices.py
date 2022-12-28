@@ -35,3 +35,10 @@ def run(slice_index, next_payload_index, input_lists, output_lists):
     for i in range(len(results)):
         result = results[i]
         json_manager.payload_to_jsonfile(output_lists[slice_index][i], result)
+
+    # LOCAL ONLY
+    next_payload_index = json_manager.get_next_payload_index()
+    json_manager.make_event(slice_index + 1, next_payload_index, input_lists, output_lists)
+    # END LOCAL ONLY
+
+    print("Slice " + str(slice_index) + ": execution completed successfully")

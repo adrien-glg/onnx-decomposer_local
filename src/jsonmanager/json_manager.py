@@ -23,7 +23,8 @@ def get_payloads_paths():
 
 def init_dictionary():
     global dict_init_completed
-    os.mkdir(onnxmanager.JSON_ROOT_PATH)
+    if not os.path.exists(onnxmanager.JSON_ROOT_PATH):
+        os.mkdir(onnxmanager.JSON_ROOT_PATH)
     init_data = json.dumps({})
     with open(onnxmanager.DICTIONARY_PATH, 'w') as outfile:
         outfile.write(init_data)
@@ -77,3 +78,20 @@ def get_payload_content(key):
         payload_content = json.load(jsonfile)
 
     return payload_content
+
+
+def get_event_path(slice_index):
+    if not os.path.exists(onnxmanager.JSON_ROOT_PATH):
+        os.mkdir(onnxmanager.JSON_ROOT_PATH)
+    event_path = os.path.splitext(onnxmanager.EVENT_PATH)[0] + str(slice_index) + \
+        os.path.splitext(onnxmanager.EVENT_PATH)[1]
+    return event_path
+
+
+def make_event(slice_index, next_payload_index, input_lists, output_lists):
+    event = {"next_slice_index": slice_index, "next_payload_index": next_payload_index, "inputs": input_lists, "outputs": output_lists}
+    json_event = json.dumps(event, indent=4)
+    filepath = get_event_path(slice_index)
+    json_file = open(filepath, "w")
+    json_file.write(json_event)
+    json_file.close()

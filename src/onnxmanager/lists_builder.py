@@ -1,4 +1,4 @@
-import os
+import json
 
 import onnx
 
@@ -79,8 +79,3 @@ def build_lists():
     input_lists[0] = constants.INPUT_LIST_START
 
     return input_lists, output_lists
-
-
-def make_event(slice_index, next_payload_index, input_lists, output_lists):
-    event = {"next_slice_index": slice_index, "next_payload_index": next_payload_index, "inputs": input_lists, "outputs": output_lists}
-    return event

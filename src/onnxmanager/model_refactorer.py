@@ -25,12 +25,10 @@ def refactor_slices(input_lists, output_lists):
     required_outputs = list(set(input_lists_flat) - set(output_lists_flat) - set(constants.INPUT_LIST_START))
     new_output_lists = output_lists
 
-    number_of_nodes_TODELETE = 0
     for slice_index in range(constants.NUMBER_OF_SLICES):
         slice_path = model_extractor.get_slice_path(slice_index)
         model = onnx.load(slice_path)
         nodes = model.graph.node
-        number_of_nodes_TODELETE += len(nodes)
         for node_index in range(len(nodes)):
             node_output = nodes[node_index].output[0]
             if node_output in required_outputs:

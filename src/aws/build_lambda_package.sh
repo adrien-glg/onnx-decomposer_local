@@ -1,12 +1,16 @@
 #!/bin/bash
 
+#DO NOT FORGET TO RUN THIS SCRIPT INSIDE A PYTHON VENV !!!
+
 PROJECT_NAME="mobiledet"
-LAMBDA_FUNCTION="lambda_functions/mobiledet_first_slice_lambda.py"
+LAMBDA_CODE="lambda_code/mobiledet"
 SLICE="slice0"
 INPUT_IMAGE_PATH="../../models/mobiledet/img_resized.npy"
 MODEL="../../models/mobiledet/slices/mobiledet_slice0.onnx"
 SLICE_PATH="packages/${PROJECT_NAME}/${SLICE}"
+OUTPUT_ZIP="mobiledet_slice0.zip"
 
+########### INITIALIZATION ###########
 if [[ -d "./${SLICE_PATH}" ]]; then
   rm -r ${SLICE_PATH}
 fi
@@ -21,17 +25,21 @@ fi
 
 mkdir ${SLICE_PATH}
 
-cp ${LAMBDA_FUNCTION} ${SLICE_PATH}/lambda_function.py
 
-#pip install -Iv --target ./package numpy onnxruntime onnx protobuf==3.20.1
-pip install -Iv --target ./package numpy
+########### MAIN ###########
+#cp -a ${LAMBDA_CODE} ${SLICE_PATH}
 
-zip -r ${SLICE_PATH}/package.zip package
+pip install -Iv --target ${SLICE_PATH}/package numpy onnxruntime onnx protobuf==3.20.2
+#pip install -Iv --target ${SLICE_PATH}/package numpy
 
-zip -g ${SLICE_PATH}/package.zip ${SLICE_PATH}/lambda_function.py ${MODEL} ${INPUT_IMAGE_PATH}
+cp -r ${LAMBDA_CODE}/* ${MODEL} ${INPUT_IMAGE_PATH} ${SLICE_PATH}/package
 
-#mv package.zip mobiledet_part1.zip
+cd ${SLICE_PATH}/package
+zip -r ../package.zip .
+cd ..
 
-rm -r package ${SLICE_PATH}/lambda_function.py
+mv package.zip ${OUTPUT_ZIP}
+
+rm -r package
 
 

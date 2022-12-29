@@ -6,6 +6,19 @@ from src import onnxmanager
 from src import constants
 
 
+# GET ALL OUTPUTS FROM THE FULL MODEL
+def get_all_outputs():
+    all_outputs = []
+    model = onnx.load(onnxmanager.MODEL_PATH)
+    nodes = model.graph.node
+    total_nb_of_layers = len(nodes)
+
+    for i in range(total_nb_of_layers):
+        all_outputs += [nodes[i].output[0]]
+
+    return all_outputs
+
+
 def get_intermediate_outputs(start_layer_index, end_layer_index):
     intermediate_outputs = []
     model = onnx.load(onnxmanager.MODEL_PATH)

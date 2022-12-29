@@ -23,8 +23,17 @@ def get_results():
     return results
 
 
-def run(output_lists):
+def run(slice_index, input_lists, output_lists):
     results = get_results()
+
     for i in range(len(results)):
         result = results[i]
         json_manager.payload_to_jsonfile(output_lists[0][i], result)
+
+    # LOCAL ONLY
+    next_payload_index = json_manager.get_next_payload_index()
+    json_manager.make_event(slice_index + 1, next_payload_index, input_lists, output_lists)
+    # END LOCAL ONLY
+
+    print("Slice 0: execution completed successfully")
+

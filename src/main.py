@@ -42,19 +42,22 @@ if __name__ == '__main__':
     # END MOBILEDET
 
     # EFFICIENTDET:
-    # efficientdet_first_slice.run(outputs)
+    # efficientdet_first_slice.run(slice_index, inputs, outputs)
     #
     # for slice_index in range(1, constants.NUMBER_OF_SLICES):
-    #     print(slice_index)
-    #     other_slices.run(slice_index, inputs, outputs)
+    #     event_path = json_manager.get_event_path(slice_index)
+    #     event = json.load(open(event_path))
+    #     next_payload_index = event['next_payload_index']
+    #     other_slices.run(slice_index, next_payload_index, inputs, outputs)
     #
-    # result = jsonmanager.get_payload_content("detections:0")
+    # result = json_manager.get_payload_content("detections:0")
     # print("\nRESULTS:")
     # print(result[0][0])
     # END EFFICIENTDET
 
     # UPLOAD ONNX FILES TO S3
-    s3_local_manager.upload_onnx_slices()
+    # COMMENT THIS IF NOT USED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # s3_local_manager.upload_onnx_slices()
     # END UPLOAD ONNX FILES TO S3
 
     # PAYLOADS SIZES

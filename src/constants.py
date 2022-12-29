@@ -15,7 +15,6 @@ OUTPUT_LIST_END = ["TFLite_Detection_PostProcess", "TFLite_Detection_PostProcess
 
 S3_BUCKET = "onnx-mobiledet-bucket"
 
-# For mobiledet, it fails for number of slices = 17, 19, (did not check more)
-NUMBER_OF_SLICES = 13
+NUMBER_OF_SLICES = 1
 
 

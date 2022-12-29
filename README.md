@@ -25,6 +25,7 @@ cd src/aws
 
 ```bash
 ./create_python_venv.sh
+source venv/bin/activate
 ```
 
 ```bash

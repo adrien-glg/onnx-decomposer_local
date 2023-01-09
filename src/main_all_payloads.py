@@ -35,7 +35,7 @@ if __name__ == '__main__':
     modified_model_path = model_extractor.get_slice_path(0)
     for i in range(len(outputs[0])):
         model_refactorer.add_model_output(model, modified_model_path, outputs[0][i])
-    # END TAKES SOME TIME TO COMPLETE
+    # END, TAKES SOME TIME TO COMPLETE
 
     slice_index, payload_index = 0, 0
     json_manager.make_event(slice_index, payload_index, inputs, outputs)

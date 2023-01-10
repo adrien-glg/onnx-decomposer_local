@@ -91,4 +91,6 @@ def build_lists():
     # First slice:
     input_lists[0] = constants.INPUT_LIST_START
 
+    print("Lists built successfully")
+
     return input_lists, output_lists

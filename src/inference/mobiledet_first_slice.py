@@ -19,7 +19,7 @@ def get_results():
 
 def run(slice_index, input_lists, output_lists):
     results = get_results()
-    
+
     for i in range(len(results)):
         result = results[i]
         json_manager.payload_to_jsonfile(output_lists[0][i], result)

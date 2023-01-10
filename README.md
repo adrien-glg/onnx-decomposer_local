@@ -28,16 +28,23 @@ cd src/aws
 source venv/bin/activate
 ```
 
+To create the whole deployment Lambda package from scratch:
 ```bash
 ./make_lambda_package.sh
 ```
 
+Once the package has been created, you can modify code only with:
+```bash
+./modify_code_only.sh
+```
+
+To create the Lambda function on AWS:
 ```bash
 ./create_lambda_function.sh
 ```
 
+Run as many times as there are layers:
 ```bash
-./invoke_lambda_function.sh
-./invoke_lambda_function_2.sh
+./invoke_lambda_function.sh -l <layer_number>
 ```
 

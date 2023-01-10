@@ -26,10 +26,9 @@ fi
 ########### MAIN ###########
 #cp -a ${LAMBDA_CODE} ${SLICE_PATH}
 
-pip install -Iv --target ${PACKAGE_PATH}/package numpy onnxruntime onnx protobuf==3.20.2
-#pip install -Iv --target ${PACKAGE_PATH}/package numpy
+#pip install -Iv --target ${PACKAGE_PATH}/package numpy onnxruntime onnx protobuf==3.20.2
+pip install -Iv --target ${PACKAGE_PATH}/package -r ${LAMBDA_CODE}/lambda_requirements.txt
 
-#cp -r ${LAMBDA_CODE}/* ${MODEL} ${INPUT_IMAGE_PATH} ${PACKAGE_PATH}/package
 cp -r ${LAMBDA_CODE}/* ${INPUT_IMAGE_PATH} ${PACKAGE_PATH}/package
 
 cd ${PACKAGE_PATH}/package

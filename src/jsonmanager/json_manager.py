@@ -1,5 +1,6 @@
 import json
 import os
+import pathlib
 
 from src import onnxmanager
 
@@ -21,6 +22,27 @@ def get_payloads_paths():
     return payloads_paths
 
 
+def reset_payloads_paths():
+    global payloads_paths
+    payloads_paths = []
+
+
+def get_new_filepath():
+    global next_payload_index
+    global payloads_paths
+    new_filepath = os.path.splitext(onnxmanager.JSON_PAYLOAD_PATH)[0] + str(next_payload_index) + \
+        os.path.splitext(onnxmanager.JSON_PAYLOAD_PATH)[1]
+    next_payload_index += 1
+    payloads_paths += [new_filepath]
+    return new_filepath
+
+
+def remove_tmp_from_path(path):
+    filepath = pathlib.Path(path)
+    new_filepath = str(filepath.relative_to(*filepath.parts[:2]))
+    return new_filepath
+
+
 def init_dictionary():
     global dict_init_completed
     if not os.path.exists(onnxmanager.JSON_ROOT_PATH):
@@ -37,20 +59,12 @@ def init_dictionary():
 def update_dictionary(key, value):
     with open(onnxmanager.DICTIONARY_PATH) as file:
         file_data = json.load(file)
+        ### LOCAL
         file_data[key] = value
+        ### END LOCAL
 
     with open(onnxmanager.DICTIONARY_PATH, 'w') as file:
         json.dump(file_data, file, indent=4)
-
-
-def get_new_filepath():
-    global next_payload_index
-    global payloads_paths
-    new_filepath = os.path.splitext(onnxmanager.JSON_PAYLOAD_PATH)[0] + str(next_payload_index) + \
-        os.path.splitext(onnxmanager.JSON_PAYLOAD_PATH)[1]
-    next_payload_index += 1
-    payloads_paths += [new_filepath]
-    return new_filepath
 
 
 def payload_to_jsonfile(key, data):

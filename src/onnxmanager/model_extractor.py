@@ -25,3 +25,4 @@ def extract_model_slices(input_lists, output_lists):
     for slice_index in range(constants.NUMBER_OF_SLICES):
         model_slice_path = get_slice_path(slice_index)
         extract_slice(model_slice_path, input_lists[slice_index], output_lists[slice_index])
+        print("Slice " + str(slice_index) + " extracted successfully")

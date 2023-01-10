@@ -37,5 +37,7 @@ def refactor_slices(input_lists, output_lists):
                     new_output_lists[slice_index] += [node_output]
                 required_outputs.remove(nodes[node_index].output[0])
 
+    print("Slices refactored successfully")
+
     return new_output_lists
 

@@ -26,7 +26,8 @@ if __name__ == '__main__':
 
     slice_index, payload_index = 0, 0
     json_manager.make_event(slice_index, payload_index, inputs, outputs)
-    shutil.copy(json_manager.get_event_path(0), "aws/events/event0.json")
+    shutil.copy(json_manager.get_event_path(0), "events/event0.json")
+    print("event0.json created successfully")
 
     # MOBILEDET:
     # mobiledet_first_slice.run(slice_index, inputs, outputs)
@@ -43,20 +44,20 @@ if __name__ == '__main__':
     # END MOBILEDET
 
     # EFFICIENTDET:
-    efficientdet_first_slice.run(slice_index, inputs, outputs)
-
-    for slice_index in range(1, constants.NUMBER_OF_SLICES):
-        event_path = json_manager.get_event_path(slice_index)
-        event = json.load(open(event_path))
-        next_payload_index = event['next_payload_index']
-        other_slices.run(slice_index, next_payload_index, inputs, outputs)
-
-    result = json_manager.get_payload_content("detections:0")
-    print("\nRESULTS:")
-    print(result[0][0])
+    # efficientdet_first_slice.run(slice_index, inputs, outputs)
+    #
+    # for slice_index in range(1, constants.NUMBER_OF_SLICES):
+    #     event_path = json_manager.get_event_path(slice_index)
+    #     event = json.load(open(event_path))
+    #     next_payload_index = event['next_payload_index']
+    #     other_slices.run(slice_index, next_payload_index, inputs, outputs)
+    #
+    # result = json_manager.get_payload_content("detections:0")
+    # print("\nRESULTS:")
+    # print(result[0][0])
     # END EFFICIENTDET
 
     # UPLOAD ONNX FILES TO S3
     # COMMENT THIS IF NOT USED !!!
-    s3_local_manager.upload_onnx_slices()
+    # s3_local_manager.upload_onnx_slices()
     # END UPLOAD ONNX FILES TO S3

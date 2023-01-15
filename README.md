@@ -1,4 +1,4 @@
-# onnx-decomposer
+# onnx-decomposer_local
 
 ## Local Execution
 
@@ -28,6 +28,7 @@ cd src/aws
 source venv/bin/activate
 ```
 
+Before creating the Lambda package, make sure `config.sh` and `project_name.py` have been configured correctly.
 To create the whole deployment Lambda package from scratch:
 ```bash
 ./make_lambda_package.sh
@@ -43,7 +44,8 @@ To create the Lambda function on AWS:
 ./create_lambda_function.sh
 ```
 
-Run as many times as there are layers:
+Before invoking the Lambda function, make sure you have run the code locally, so that `event0.json` is the correct one.
+To invoke the Lambda function (run as many times as there are layers):
 ```bash
 ./invoke_lambda_function.sh -l <layer_number>
 ```

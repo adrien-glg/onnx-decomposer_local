@@ -16,8 +16,8 @@ from src import constants
 if __name__ == '__main__':
 
     # Do not forget to delete all files from previous executions
-    # if os.path.exists(onnxmanager.JSON_ROOT_PATH):
-    #     shutil.rmtree(onnxmanager.JSON_ROOT_PATH)
+    if os.path.exists(onnxmanager.JSON_ROOT_PATH):
+        shutil.rmtree(onnxmanager.JSON_ROOT_PATH)
 
     inputs, outputs = lists_builder.build_lists()
 
@@ -41,7 +41,21 @@ if __name__ == '__main__':
     json_manager.make_event(slice_index, payload_index, inputs, outputs)
 
     # MOBILEDET:
-    mobiledet_first_slice.run(slice_index, inputs, outputs)
+    # mobiledet_first_slice.run(slice_index, inputs, outputs)
+    #
+    # for slice_index in range(1, constants.NUMBER_OF_SLICES):
+    #     event_path = json_manager.get_event_path(slice_index)
+    #     event = json.load(open(event_path))
+    #     next_payload_index = event['next_payload_index']
+    #     other_slices.run(slice_index, next_payload_index, inputs, outputs)
+    #
+    # result = json_manager.get_payload_content("TFLite_Detection_PostProcess")
+    # print("\nRESULTS:")
+    # print(result[0][0])
+    # END MOBILEDET
+
+    # EFFICIENTDET:
+    efficientdet_first_slice.run(slice_index, inputs, outputs)
 
     for slice_index in range(1, constants.NUMBER_OF_SLICES):
         event_path = json_manager.get_event_path(slice_index)
@@ -49,13 +63,13 @@ if __name__ == '__main__':
         next_payload_index = event['next_payload_index']
         other_slices.run(slice_index, next_payload_index, inputs, outputs)
 
-    result = json_manager.get_payload_content("TFLite_Detection_PostProcess")
+    result = json_manager.get_payload_content("detections:0")
     print("\nRESULTS:")
     print(result[0][0])
-    # END MOBILEDET
+    # END EFFICIENTDET
 
     # PAYLOADS SIZES
-    print("\nVIRTUAL PAYLOADS SIZES PER SLICE:")
+    print("\nALL PAYLOADS SIZES:")
     payloads_sizes = payload_size_calculator.get_all_payloads_sizes(outputs)
     # print(payloads_sizes)
 

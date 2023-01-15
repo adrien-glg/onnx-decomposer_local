@@ -1,20 +1,9 @@
 # PERSONAL
-models/*/slices/
-data/
 .idea/
-src/aws/*
-!src/aws/config.sh
-!src/aws/create_python_venv.sh
-!src/aws/make_lambda_package.sh
-!src/aws/create_lambda_function.sh
-!src/aws/invoke_lambda_function.sh
-!src/aws/invoke_lambda_function_OLD.sh
-!src/aws/invoke_lambda_function_2_OLD.sh
-!src/aws/modify_code_only.sh
-!src/aws/lambda_code/mobiledet/mobiledet_lambda.py
-!src/aws/lambda_code/mobiledet/src/inference/__init__.py
-!src/aws/lambda_code/mobiledet/src/onnxmanager/__init__.py
-!src/aws/lambda_code/mobiledet/src/jsonmanager/__init__.py
+models/*/slices/
+src/data/
+src/events/
+src/tests
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

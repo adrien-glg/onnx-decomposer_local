@@ -36,8 +36,7 @@ def run(slice_index, input_lists, output_lists):
 
     json_manager.set_next_payload_index(0)
     # LOCAL ONLY
-    next_payload_index = json_manager.get_next_payload_index()
-    json_manager.make_event(slice_index + 1, next_payload_index, input_lists, output_lists)
+    json_manager.make_event(slice_index + 1, input_lists, output_lists)
     # END LOCAL ONLY
 
     print("Slice " + str(slice_index) + ": execution completed successfully")

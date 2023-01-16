@@ -49,7 +49,6 @@ def build_lists():
     nodes = model.graph.node
 
     total_nb_of_layers = len(nodes)
-    # print("total_nb_of_layers: ", total_nb_of_layers)
     nb_of_layers_per_slice = total_nb_of_layers // constants.NUMBER_OF_SLICES
     top_layer_index = 0
     bottom_layer_index = nb_of_layers_per_slice - 1

@@ -1,5 +1,6 @@
 from src import constants
 
+INPUT_IMAGE_PATH = "../models/" + constants.PROJECT_NAME + "/" + constants.INPUT_IMAGE
 MODEL_PATH = "../models/" + constants.PROJECT_NAME + "/" + constants.ONNX_MODEL
 JSON_ROOT_PATH = "../data/"
 JSON_PAYLOAD_PATH = "../data/payload.json"

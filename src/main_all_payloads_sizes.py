@@ -46,8 +46,7 @@ if __name__ == '__main__':
     # for slice_index in range(1, constants.NUMBER_OF_SLICES):
     #     event_path = json_manager.get_event_path(slice_index)
     #     event = json.load(open(event_path))
-    #     next_payload_index = event['next_payload_index']
-    #     other_slices.run(slice_index, next_payload_index, inputs, outputs)
+    #     other_slices.run(slice_index, inputs, outputs)
     #
     # result = json_manager.get_payload_content("TFLite_Detection_PostProcess")
     # print("\nRESULTS:")
@@ -58,10 +57,7 @@ if __name__ == '__main__':
     efficientdet_first_slice.run(slice_index, inputs, outputs)
 
     for slice_index in range(1, constants.NUMBER_OF_SLICES):
-        event_path = json_manager.get_event_path(slice_index)
-        event = json.load(open(event_path))
-        next_payload_index = event['next_payload_index']
-        other_slices.run(slice_index, next_payload_index, inputs, outputs)
+        other_slices.run(slice_index, inputs, outputs)
 
     result = json_manager.get_payload_content("detections:0")
     print("\nRESULTS:")

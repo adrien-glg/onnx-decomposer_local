@@ -99,15 +99,15 @@ def get_event_path(slice_index):
     if not os.path.exists(onnxmanager.JSON_ROOT_PATH):
         os.mkdir(onnxmanager.JSON_ROOT_PATH)
     event_path = os.path.splitext(onnxmanager.EVENT_PATH)[0] + str(slice_index) + \
-                 os.path.splitext(onnxmanager.EVENT_PATH)[1]
+        os.path.splitext(onnxmanager.EVENT_PATH)[1]
     return event_path
 
 
-def make_event(slice_index, next_payload_index, input_lists, output_lists):
+def make_event(slice_index, input_lists, output_lists):
     number_of_slices = constants.NUMBER_OF_SLICES
     keep_going = slice_index < number_of_slices
     event = {"keep_going": keep_going, "number_of_slices": number_of_slices, "next_slice_index": slice_index,
-             "next_payload_index": next_payload_index, "inputs": input_lists, "outputs": output_lists}
+             "inputs": input_lists, "outputs": output_lists}
     json_event = json.dumps(event, indent=4)
     filepath = get_event_path(slice_index)
     json_file = open(filepath, "w")

@@ -22,8 +22,9 @@ def run(slice_index, input_lists, output_lists):
 
     for i in range(len(results)):
         result = results[i]
-        json_manager.payload_to_jsonfile(output_lists[0][i], result)
+        json_manager.payload_to_jsonfile(slice_index, output_lists[0][i], result)
 
+    json_manager.set_next_payload_index(0)
     # LOCAL ONLY
     next_payload_index = json_manager.get_next_payload_index()
     json_manager.make_event(slice_index + 1, next_payload_index, input_lists, output_lists)

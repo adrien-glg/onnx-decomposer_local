@@ -14,9 +14,9 @@ def get_next_payload_index():
     return next_payload_index
 
 
-def set_next_payload_index(new_next_payload_index):
+def set_next_payload_index(payload_index):
     global next_payload_index
-    next_payload_index = new_next_payload_index
+    next_payload_index = payload_index
 
 
 def get_payloads_paths():
@@ -28,11 +28,11 @@ def reset_payloads_paths():
     payloads_paths = []
 
 
-def get_new_filepath():
+def get_new_filepath(slice_index):
     global next_payload_index
     global payloads_paths
-    new_filepath = os.path.splitext(onnxmanager.JSON_PAYLOAD_PATH)[0] + str(next_payload_index) + \
-        os.path.splitext(onnxmanager.JSON_PAYLOAD_PATH)[1]
+    new_filepath = os.path.splitext(onnxmanager.JSON_PAYLOAD_PATH)[0] + str(slice_index) + "_" + \
+        str(next_payload_index) + os.path.splitext(onnxmanager.JSON_PAYLOAD_PATH)[1]
     next_payload_index += 1
     payloads_paths += [new_filepath]
     return new_filepath
@@ -68,7 +68,7 @@ def update_dictionary(key, value):
         json.dump(file_data, file, indent=4)
 
 
-def payload_to_jsonfile(key, data):
+def payload_to_jsonfile(slice_index, key, data):
     global dict_init_completed
     if not dict_init_completed:
         init_dictionary()
@@ -76,7 +76,7 @@ def payload_to_jsonfile(key, data):
     data = data.tolist()
     data = json.dumps(data)
 
-    filepath = get_new_filepath()
+    filepath = get_new_filepath(slice_index)
     json_file = open(filepath, "w")
     json_file.write(data)
     json_file.close()
@@ -99,7 +99,7 @@ def get_event_path(slice_index):
     if not os.path.exists(onnxmanager.JSON_ROOT_PATH):
         os.mkdir(onnxmanager.JSON_ROOT_PATH)
     event_path = os.path.splitext(onnxmanager.EVENT_PATH)[0] + str(slice_index) + \
-        os.path.splitext(onnxmanager.EVENT_PATH)[1]
+                 os.path.splitext(onnxmanager.EVENT_PATH)[1]
     return event_path
 
 

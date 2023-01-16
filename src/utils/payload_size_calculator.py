@@ -31,8 +31,3 @@ def get_payloads_sizes(outputs):
         payloads_sizes_per_slice += [slice_payload_size]
 
     return payloads_sizes_per_slice
-
-
-# f_size = os.path.getsize('../data/payload0.json')
-# x = convert_bytes(f_size)
-# print(x)

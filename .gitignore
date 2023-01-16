@@ -1,9 +1,11 @@
 # PERSONAL
 .idea/
+data/*
+!data/README.md
+events/*
+!events/README.md
 models/*/slices/
-src/data/
-src/events/
-src/tests
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

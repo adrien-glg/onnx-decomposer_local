@@ -2,4 +2,5 @@ numpy
 onnx
 onnxruntime
 Pillow
+boto3
 

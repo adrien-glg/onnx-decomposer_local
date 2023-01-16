@@ -27,6 +27,7 @@ if __name__ == '__main__':
     slice_index, payload_index = 0, 0
     json_manager.make_event(slice_index, payload_index, inputs, outputs)
     shutil.copy(json_manager.get_event_path(0), "events/event0.json")
+    shutil.copy(json_manager.get_event_path(0), "../../onnx-decomposer_aws/events/event0.json")
     print("event0.json created successfully")
 
     # MOBILEDET:

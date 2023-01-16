@@ -1,3 +1,3 @@
 ## `events` directory
 
-Executions will copy events files to this directory.
+Executions will save events files to this directory.

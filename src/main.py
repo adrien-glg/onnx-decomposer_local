@@ -8,7 +8,7 @@ import onnxmanager
 from inference import first_slice, other_slices
 from jsonmanager import json_manager
 from onnxmanager import lists_builder, model_extractor, model_refactorer
-from src.utils import sizes_helper, payload_size_calculator, package_size_calculator, cleaner
+from src.utils import cleaner
 from src.s3manager import s3_local_manager
 from src import constants
 

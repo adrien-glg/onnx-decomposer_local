@@ -16,6 +16,6 @@ S3_BUCKET = "onnx-mobiledet-bucket"
 # OUTPUT_LIST_END = ['detections:0']
 # S3_BUCKET = "onnx-efficientdet-bucket"
 
-NUMBER_OF_SLICES = 2
+NUMBER_OF_SLICES = 5
 
 

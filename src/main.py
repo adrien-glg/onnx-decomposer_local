@@ -60,5 +60,5 @@ if __name__ == '__main__':
 
     # UPLOAD ONNX FILES TO S3
     # COMMENT THIS IF NOT USED !!!
-    # s3_local_manager.upload_onnx_slices()
+    s3_local_manager.upload_onnx_slices()
     # END UPLOAD ONNX FILES TO S3

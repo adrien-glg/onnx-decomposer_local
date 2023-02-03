@@ -13,6 +13,8 @@ Install requirements:
 pip install -r requirements.txt
 ```
 
+Configure `config.ini` as needed.
+
 From `root`, run the following commands:
 ```bash
 export PYTHONPATH=$PYTHONPATH:"$PWD":"$PWD/src"

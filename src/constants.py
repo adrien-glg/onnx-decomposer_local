@@ -1,21 +1,16 @@
-# MOBILEDET:
-PROJECT_NAME = "mobiledet"
-ONNX_MODEL = "mobiledet.onnx"
-INPUT_IMAGE = "img_resized.npy"
-INPUT_LIST_START = ['normalized_input_image_tensor']
-OUTPUT_LIST_END = ["TFLite_Detection_PostProcess", "TFLite_Detection_PostProcess:1",
-                   "TFLite_Detection_PostProcess:2", "TFLite_Detection_PostProcess:3"]
-S3_BUCKET = "onnx-mobiledet-bucket"
+from configparser import ConfigParser
 
+config_parser = ConfigParser()
+config_parser.read('config.ini')
 
-# EFFICIENTDET
-# PROJECT_NAME = "efficientdet"
-# ONNX_MODEL = "efficientdet-d2.onnx"
-# INPUT_IMAGE = "img_efficientdet.png"
-# INPUT_LIST_START = ["image_arrays:0"]
-# OUTPUT_LIST_END = ['detections:0']
-# S3_BUCKET = "onnx-efficientdet-bucket"
+PROJECT_NAME = config_parser.get('project', 'project_name')
+ONNX_MODEL = config_parser.get('project', 'onnx_model')
+INPUT_IMAGE = config_parser.get('project', 'input_image')
+S3_BUCKET = config_parser.get('aws', 's3_bucket')
+NUMBER_OF_SLICES = config_parser.getint('number_of_slices', 'number_of_slices')
 
-NUMBER_OF_SLICES = 5
+parsed_input_list = config_parser.get('project', 'input_list_start')
+INPUT_LIST_START = list(parsed_input_list.split("\n"))[1:]
 
-
+parsed_output_list = config_parser.get('project', 'output_list_end')
+OUTPUT_LIST_END = list(parsed_output_list.split("\n"))[1:]

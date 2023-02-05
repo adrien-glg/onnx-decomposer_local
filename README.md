@@ -1,5 +1,14 @@
 # onnx-decomposer_local
 
+## Init Configuration
+
+First, you need to configure the following file as needed:
+- `projectname_config.ini`
+- `projects/<projectname>/<projectname>_config.ini`
+- `projects/<projectname>/<projectname>_steps.py`
+
+## Execution
+
 To be safe, it is recommended to use a Python Virtual Environment (venv):
 ```bash
 python3 -m venv venv
@@ -12,8 +21,6 @@ Install requirements:
 ```bash
 pip install -r requirements.txt
 ```
-
-Configure `config.ini` as needed.
 
 From `root`, run the following commands:
 ```bash

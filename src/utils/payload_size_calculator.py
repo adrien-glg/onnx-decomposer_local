@@ -5,7 +5,7 @@ from src import onnxmanager
 from src import constants
 
 
-# TO BE USED WITH MAIN_ALL_PAYLOADS.PY ONLY
+# FUNCTION TO BE USED WITH MAIN_ALL_PAYLOADS.PY ONLY
 def get_all_payloads_sizes(outputs):
     payloads_sizes = []
     outputs = outputs[0]

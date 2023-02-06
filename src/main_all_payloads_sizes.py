@@ -1,68 +1,54 @@
-import json
-import os
 import shutil
 import onnx
 
 import onnxmanager
-from inference import other_slices, mobiledet_first_slice, efficientdet_first_slice
+from inference import first_slice, other_slices
 from jsonmanager import json_manager
 from onnxmanager import lists_builder, model_extractor, model_refactorer
-from src.utils import sizes_helper, payload_size_calculator, package_size_calculator
-from src.s3manager import s3_local_manager
+from src.utils import cleaner
+from src.utils import sizes_helper, payload_size_calculator
 from src import constants
 
-# THE FOLLOWING CODE ONLY WORKS WITH NUMBER_OF_LAYERS=1
+import importlib
+project_steps = importlib.import_module(constants.PROJECT_STEPS_MODULE, package=None)
 
+
+# THE FOLLOWING CODE ONLY WORKS WITH NUMBER_OF_SLICES=1
 if __name__ == '__main__':
 
-    # Do not forget to delete all files from previous executions
-    if os.path.exists(onnxmanager.JSON_ROOT_PATH):
-        shutil.rmtree(onnxmanager.JSON_ROOT_PATH)
+    cleaner.purge_all_except_pattern(onnxmanager.JSON_ROOT_PATH, "README.md")
+    cleaner.purge_all_except_pattern(onnxmanager.EVENTS_PATH, "README.md")
 
     inputs, outputs = lists_builder.build_lists()
 
     outputs = [lists_builder.get_all_outputs()]
 
-    # INSTEAD OF RUNNING THE CODE BELOW, DO:
+    # INSTEAD OF RUNNING THE CODE BELOW ("LASTING CODE SNIPPET"), DO:
     # move mobiledet_all_outputs.onnx to the models/mobiledet/slices/ folder
     # rename this file to mobiledet_slice0.onnx
 
-    # TAKES SOME TIME TO COMPLETE
-    if os.path.exists(onnxmanager.SLICES_PATH):
-        shutil.rmtree(onnxmanager.SLICES_PATH)
-
+    # LASTING CODE SNIPPET
+    cleaner.purge(onnxmanager.SLICES_PATH, "")
     model = onnx.load(onnxmanager.MODEL_PATH)
     modified_model_path = model_extractor.get_slice_path(0)
     for i in range(len(outputs[0])):
         model_refactorer.add_model_output(model, modified_model_path, outputs[0][i])
-    # END, TAKES SOME TIME TO COMPLETE
+    # END LASTING CODE SNIPPET
 
-    slice_index, payload_index = 0, 0
-    json_manager.make_event(slice_index, payload_index, inputs, outputs)
+    slice_index = 0
+    json_manager.make_event(slice_index, inputs, outputs)
+    shutil.copy(json_manager.get_event_path(0), "../../onnx-decomposer_aws/events/event0.json")
+    print("event0.json created successfully")
 
-    # MOBILEDET:
-    # mobiledet_first_slice.run(slice_index, inputs, outputs)
-    #
-    # for slice_index in range(1, constants.NUMBER_OF_SLICES):
-    #     event_path = json_manager.get_event_path(slice_index)
-    #     event = json.load(open(event_path))
-    #     other_slices.run(slice_index, inputs, outputs)
-    #
-    # result = json_manager.get_payload_content("TFLite_Detection_PostProcess")
-    # print("\nRESULTS:")
-    # print(result[0][0])
-    # END MOBILEDET
-
-    # EFFICIENTDET:
-    efficientdet_first_slice.run(slice_index, inputs, outputs)
+    img = project_steps.get_preprocessed_input()
+    first_slice.run(img, slice_index, inputs, outputs)
 
     for slice_index in range(1, constants.NUMBER_OF_SLICES):
         other_slices.run(slice_index, inputs, outputs)
 
-    result = json_manager.get_payload_content("detections:0")
+    result = project_steps.get_result()
     print("\nRESULTS:")
-    print(result[0][0])
-    # END EFFICIENTDET
+    print(result)
 
     # PAYLOADS SIZES
     print("\nALL PAYLOADS SIZES:")

@@ -7,7 +7,6 @@ from src.onnxmanager import model_extractor
 from src.jsonmanager import json_manager
 
 
-
 def get_results(input_file):
     model_slice0_path = model_extractor.get_slice_path(0)
 

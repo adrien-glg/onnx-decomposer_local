@@ -38,7 +38,5 @@ if __name__ == '__main__':
     print("\nRESULTS:")
     print(result)
 
-    # UPLOAD ONNX FILES TO S3
-    # To save S3 costs, comment this if not used !!!
+    # To save S3 costs, comment this if not used!!
     s3_local_manager.upload_onnx_slices()
-    # END UPLOAD ONNX FILES TO S3

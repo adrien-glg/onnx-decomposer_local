@@ -14,6 +14,3 @@ def purge_all_except_pattern(folder, pattern):
         for f in os.listdir(folder):
             if not re.search(pattern, f):
                 os.remove(os.path.join(folder, f))
-
-
-purge_all_except_pattern("../../1todelete", " ")

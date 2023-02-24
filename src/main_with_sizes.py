@@ -5,7 +5,7 @@ from inference import first_slice, other_slices
 from jsonmanager import json_manager
 from onnxmanager import lists_builder, model_extractor, model_refactorer
 from src.utils import cleaner
-from src.utils import sizes_helper, payload_size_calculator, package_size_calculator
+from src.utils import size_helper, payload_size_calculator
 from src.s3manager import s3_local_manager
 from src import constants
 
@@ -44,18 +44,10 @@ if __name__ == '__main__':
     # s3_local_manager.upload_onnx_slices()
     # END UPLOAD ONNX FILES TO S3
 
-    # PAYLOADS SIZES
-    print("\nVIRTUAL PAYLOADS SIZES PER SLICE:")
-    payloads_sizes = payload_size_calculator.get_payloads_sizes()
-    # print(payloads_sizes)
+    # PAYLOAD SIZES
+    payload_sizes = payload_size_calculator.get_payload_sizes()
+    pretty_payload_sizes = size_helper.get_pretty_sizes(payload_sizes)
 
-    pretty_payloads_sizes = sizes_helper.get_pretty_sizes(payloads_sizes)
-    print(pretty_payloads_sizes)
-
-    # PACKAGES SIZES
-    # print("\nPACKAGES SIZES:")
-    # packages_sizes = package_size_calculator.get_packages_sizes()
-    # print(packages_sizes)
-    #
-    # pretty_packages_sizes = sizes_helper.get_pretty_sizes(packages_sizes)
-    # print(pretty_packages_sizes)
+    print("\nVIRTUAL PAYLOAD SIZES PER SLICE:")
+    print(pretty_payload_sizes)
+    # print(payload_sizes)

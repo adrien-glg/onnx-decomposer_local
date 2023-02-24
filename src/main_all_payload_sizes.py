@@ -6,7 +6,7 @@ from inference import first_slice, other_slices
 from jsonmanager import json_manager
 from onnxmanager import lists_builder, model_extractor, model_refactorer
 from src.utils import cleaner
-from src.utils import sizes_helper, payload_size_calculator
+from src.utils import size_helper, payload_size_calculator
 from src import constants
 
 import importlib
@@ -50,10 +50,10 @@ if __name__ == '__main__':
     print("\nRESULTS:")
     print(result)
 
-    # PAYLOADS SIZES
-    print("\nALL PAYLOADS SIZES:")
-    payloads_sizes = payload_size_calculator.get_all_payloads_sizes(outputs)
-    # print(payloads_sizes)
+    # PAYLOAD SIZES
+    print("\nALL PAYLOAD SIZES:")
+    payload_sizes = payload_size_calculator.get_all_payload_sizes(outputs)
+    # print(payload_sizes)
 
-    pretty_payloads_sizes = sizes_helper.get_pretty_sizes(payloads_sizes)
-    print(pretty_payloads_sizes)
+    pretty_payload_sizes = size_helper.get_pretty_sizes(payload_sizes)
+    print(pretty_payload_sizes)

@@ -1,5 +1,7 @@
 # onnx-decomposer_local
 
+First see: [README_preliminaries.md](README_preliminaries.md)
+
 ## Init Configuration
 
 First, you need to configure the following file as needed:

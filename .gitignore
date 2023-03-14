@@ -5,6 +5,7 @@ data/*
 events/*
 !events/README.md
 models/*/slices/
+models/*/*_tensorflow
 
 
 # Byte-compiled / optimized / DLL files

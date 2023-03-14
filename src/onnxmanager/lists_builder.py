@@ -1,5 +1,3 @@
-import json
-
 import onnx
 
 from src import onnxmanager

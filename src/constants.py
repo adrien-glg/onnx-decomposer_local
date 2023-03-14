@@ -7,9 +7,11 @@ PROJECT_NAME = config_parser.get('project', 'project_name')
 
 config_parser.read('../projects/' + PROJECT_NAME + "/" + PROJECT_NAME + "_config.ini")
 
-ONNX_MODEL = config_parser.get('project', 'onnx_model')
-INPUT_IMAGE = config_parser.get('project', 'input_image')
+AWS_REGION = config_parser.get('aws', 'aws_region')
 S3_BUCKET = config_parser.get('aws', 's3_bucket')
+ONNX_MODEL = config_parser.get('project', 'onnx_model')
+INPUT = config_parser.get('input', 'input')
+PREPROCESSED_INPUT = config_parser.get('input', 'preprocessed_input')
 NUMBER_OF_SLICES = config_parser.getint('number_of_slices', 'number_of_slices')
 
 parsed_input_list = config_parser.get('project', 'input_list_start')

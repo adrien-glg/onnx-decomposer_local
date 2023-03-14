@@ -13,6 +13,7 @@ project_steps = importlib.import_module(constants.PROJECT_STEPS_MODULE, package=
 
 if __name__ == '__main__':
 
+    print("PROJECT: " + constants.PROJECT_NAME + ", " + str(constants.NUMBER_OF_SLICES) + " slices\n")
     cleaner.purge_all_except_pattern(onnxmanager.JSON_ROOT_PATH, "README.md")
     cleaner.purge_all_except_pattern(onnxmanager.EVENTS_PATH, "README.md")
 
@@ -39,4 +40,5 @@ if __name__ == '__main__':
     print(result)
 
     # To save S3 costs, comment this if not used!!
+    s3_local_manager.create_bucket()
     s3_local_manager.upload_onnx_slices()

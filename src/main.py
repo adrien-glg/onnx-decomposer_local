@@ -26,7 +26,7 @@ if __name__ == '__main__':
 
     slice_index = 0
     json_manager.make_event(slice_index, inputs, outputs)
-    shutil.copy(json_manager.get_event_path(0), "../../onnx-decomposer_aws/events/event0.json")
+    shutil.copy(json_manager.get_event_path(0), constants.EVENT_COPY_PATH)
     print("event0.json created successfully")
 
     img = project_steps.get_preprocessed_input()
@@ -39,6 +39,5 @@ if __name__ == '__main__':
     print("\nRESULTS:")
     print(result)
 
-    # To save S3 costs, comment this if not used!!
-    s3_local_manager.create_bucket()
+    # To save S3 costs, comment this if not used!
     s3_local_manager.upload_onnx_slices()

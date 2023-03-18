@@ -5,7 +5,7 @@ First see: [README_preliminaries.md](README_preliminaries.md)
 ## Init Configuration
 
 First, you need to configure the following file as needed:
-- `projectname_config.ini`
+- `general_config.ini`
 - `projects/<projectname>/<projectname>_config.ini`
 - `projects/<projectname>/<projectname>_steps.py`
 

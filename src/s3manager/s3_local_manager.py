@@ -17,11 +17,12 @@ def get_buckets_list():
 def create_bucket():
     buckets_list = get_buckets_list()
     bucket = constants.S3_BUCKET
-    if bucket not in get_buckets_list():
+    if bucket not in buckets_list:
         s3.create_bucket(Bucket=bucket, CreateBucketConfiguration={'LocationConstraint': constants.AWS_REGION})
 
 
 def upload_onnx_slices():
+    create_bucket()
     for slice_index in range(constants.NUMBER_OF_SLICES):
         model_slice_path = model_extractor.get_slice_path(slice_index)
         model_slice_path_s3 = model_extractor.get_slice_path_s3(slice_index)

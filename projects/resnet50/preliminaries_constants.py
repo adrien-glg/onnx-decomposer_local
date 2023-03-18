@@ -1,7 +1,7 @@
 from configparser import ConfigParser
 
 config_parser = ConfigParser()
-config_parser.read('../../projectname_config.ini')
+config_parser.read('../../general_config.ini')
 
 PROJECT_NAME = config_parser.get('project', 'project_name')
 

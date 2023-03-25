@@ -31,3 +31,13 @@ Start the execution:
 ```bash
 python3 main.py
 ```
+
+## AWS-related steps
+
+To go through these steps, you will need a functional AWS account. 
+For simple workloads and models, a free tier account is sufficient.         
+
+At the end of the execution, ONNX slices are uploaded to AWS S3 (AWS Cloud Storage).        
+For this step to complete, you will have to create an S3 bucket.
+Configure the following file with the AWS region you have selected and the name of the S3 bucket:
+`<projectname>_config.ini`

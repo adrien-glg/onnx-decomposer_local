@@ -4,7 +4,7 @@ import onnx
 import onnxmanager
 from inference import first_slice, other_slices
 from jsonmanager import json_manager
-from onnxmanager import lists_builder, model_extractor, model_refactorer
+from onnxmanager import lists_builder, model_extractor, model_adjuster
 from src.utils import cleaner
 from src.utils import size_helper, payload_size_calculator
 from src import constants
@@ -32,7 +32,7 @@ if __name__ == '__main__':
     model = onnx.load(onnxmanager.MODEL_PATH)
     modified_model_path = model_extractor.get_slice_path(0)
     for i in range(len(outputs[0])):
-        model_refactorer.add_model_output(model, modified_model_path, outputs[0][i])
+        model_adjuster.add_model_output(model, modified_model_path, outputs[0][i])
     # END LASTING CODE SNIPPET
 
     slice_index = 0

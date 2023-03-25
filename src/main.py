@@ -3,7 +3,7 @@ import shutil
 import onnxmanager
 from inference import first_slice, other_slices
 from jsonmanager import json_manager
-from onnxmanager import lists_builder, model_extractor, model_refactorer
+from onnxmanager import lists_builder, model_extractor, model_adjuster
 from src.utils import cleaner
 from src.s3manager import s3_local_manager
 from src import constants
@@ -22,7 +22,7 @@ if __name__ == '__main__':
     cleaner.purge(onnxmanager.SLICES_PATH, "")
     model_extractor.extract_model_slices(inputs, outputs)
 
-    outputs = model_refactorer.refactor_slices(inputs, outputs)
+    outputs = model_adjuster.adjust_slices(inputs, outputs)
 
     slice_index = 0
     json_manager.make_event(slice_index, inputs, outputs)

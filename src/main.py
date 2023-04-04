@@ -17,7 +17,7 @@ if __name__ == '__main__':
     cleaner.purge_all_except_pattern(onnxmanager.JSON_ROOT_PATH, "README.md")
     cleaner.purge_all_except_pattern(onnxmanager.EVENTS_PATH, "README.md")
 
-    inputs, outputs = lists_builder.build_lists()
+    inputs, outputs = lists_builder.get_built_lists()
 
     cleaner.purge(onnxmanager.SLICES_PATH, "")
     model_extractor.extract_model_slices(inputs, outputs)

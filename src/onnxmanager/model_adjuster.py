@@ -6,6 +6,12 @@ from src import constants
 
 
 def add_model_output(loaded_model, model_path, output_name):
+    """
+    Adds the specified output to the specified ONNX model and saves the new ONNX model to the model path
+    :param loaded_model: model to which the output will be added
+    :param model_path: path to which the model will be saved
+    :param output_name: name of the output to add
+    """
     graph_outputs = []
 
     for output_index in range(len(loaded_model.graph.output)):
@@ -18,8 +24,15 @@ def add_model_output(loaded_model, model_path, output_name):
         onnx.save(loaded_model, model_path)
 
 
-# ADJUST SLICES WITH OUTPUTS NEEDED FOR OTHER SLICES
 def adjust_slices(input_lists, output_lists):
+    """
+    Modifies each slice so that the layer outputs that need to be used by next slices are defined as a model output
+    for the slice. This is required so that all non-immediately consumed outputs are saved during the execution
+    and used by any of the next slices.
+    :param input_lists: List of the matching inputs for each slice
+    :param output_lists: List of the matching output for each slice (one output per slice)
+    :return: New list of the matching outputs for each slice
+    """
     input_lists_flat = list(np.concatenate(input_lists).flat)
     output_lists_flat = list(np.concatenate(output_lists).flat)
     required_outputs = list(set(input_lists_flat) - set(output_lists_flat) - set(constants.INPUT_LIST_START))

@@ -19,7 +19,7 @@ if __name__ == '__main__':
     cleaner.purge_all_except_pattern(onnxmanager.JSON_ROOT_PATH, "README.md")
     cleaner.purge_all_except_pattern(onnxmanager.EVENTS_PATH, "README.md")
 
-    inputs, outputs = lists_builder.build_lists()
+    inputs, outputs = lists_builder.get_built_lists()
 
     outputs = [lists_builder.get_all_outputs()]
 

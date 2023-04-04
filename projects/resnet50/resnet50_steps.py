@@ -11,6 +11,6 @@ def get_preprocessed_input():
 
 
 def get_result():
-    result = json_manager.get_payload_content("predictions")
+    result = json_manager.get_payload_data("predictions")
     result = result[0][0]
     return result

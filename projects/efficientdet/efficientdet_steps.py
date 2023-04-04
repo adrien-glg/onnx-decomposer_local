@@ -13,6 +13,6 @@ def get_preprocessed_input():
 
 
 def get_result():
-    result = json_manager.get_payload_content("detections:0")
+    result = json_manager.get_payload_data("detections:0")
     result = result[0][0]
     return result

@@ -10,6 +10,6 @@ def get_preprocessed_input():
 
 
 def get_result():
-    result = json_manager.get_payload_content("TFLite_Detection_PostProcess")
+    result = json_manager.get_payload_data("TFLite_Detection_PostProcess")
     result = result[0][0]
     return result

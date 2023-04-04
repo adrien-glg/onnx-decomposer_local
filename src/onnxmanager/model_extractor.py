@@ -41,8 +41,8 @@ def extract_model_slices(input_lists, output_lists):
     """
     Extracts as many slices as there are elements in input_lists (equal to the number of elements in output_lists),
     from the original ONNX model.
-    :param input_lists: list of the inputs of each slice we want to extract
-    :param output_lists: list of the outputs of each slice we want to extract
+    :param input_lists: list of the inputs of each slice we want to extract.
+    :param output_lists: list of the outputs of each slice we want to extract.
     """
     for slice_index in range(constants.NUMBER_OF_SLICES):
         model_slice_path = get_slice_path(slice_index)

@@ -6,7 +6,7 @@ from src.jsonmanager import json_manager
 
 
 def get_payload(input_key):
-    payload = json_manager.get_payload_content(input_key)
+    payload = json_manager.get_payload_data(input_key)
     final_payload = np.asarray(payload, dtype=np.float32)
 
     return final_payload

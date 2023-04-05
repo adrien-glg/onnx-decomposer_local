@@ -1,6 +1,7 @@
 import json
 import os
 import pathlib
+import shutil
 
 from src import onnxmanager
 from src import constants
@@ -165,3 +166,9 @@ def make_event(slice_index, input_lists, output_lists):
     json_file = open(filepath, "w")
     json_file.write(json_event)
     json_file.close()
+
+
+def make_and_export_event(slice_index, input_lists, output_lists):
+    make_event(slice_index, input_lists, output_lists)
+    shutil.copy(get_event_path(slice_index), constants.EVENT_COPY_PATH)
+    print("event0.json created and exported successfully")

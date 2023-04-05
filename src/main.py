@@ -1,10 +1,7 @@
-import shutil
-
-import onnxmanager
 from inference import first_slice, other_slices
 from jsonmanager import json_manager
 from onnxmanager import lists_builder, model_extractor, model_adjuster
-from src.utils import cleaner
+from src.utils import cleaner, result_printer
 from src.s3manager import s3_local_manager
 from src import constants
 
@@ -13,31 +10,21 @@ project_steps = importlib.import_module(constants.PROJECT_STEPS_MODULE, package=
 
 if __name__ == '__main__':
 
-    print("PROJECT: " + constants.PROJECT_NAME + ", " + str(constants.NUMBER_OF_SLICES) + " slices\n")
-    cleaner.purge_all_except_pattern(onnxmanager.JSON_ROOT_PATH, "README.md")
-    cleaner.purge_all_except_pattern(onnxmanager.EVENTS_PATH, "README.md")
+    cleaner.purge()
 
     inputs, outputs = lists_builder.get_built_lists()
-
-    cleaner.purge(onnxmanager.SLICES_PATH, "")
     model_extractor.extract_model_slices(inputs, outputs)
-
     outputs = model_adjuster.adjust_slices(inputs, outputs)
 
-    slice_index = 0
-    json_manager.make_event(slice_index, inputs, outputs)
-    shutil.copy(json_manager.get_event_path(0), constants.EVENT_COPY_PATH)
-    print("event0.json created successfully")
+    json_manager.make_and_export_event(0, inputs, outputs)
 
     img = project_steps.get_preprocessed_input()
-    first_slice.run(img, slice_index, inputs, outputs)
 
+    first_slice.run(img, inputs, outputs)
     for slice_index in range(1, constants.NUMBER_OF_SLICES):
         other_slices.run(slice_index, inputs, outputs)
 
-    result = project_steps.get_result()
-    print("\nRESULTS:")
-    print(result)
+    result_printer.print_result()
 
-    # To save S3 costs, comment this if not used!
+    # To save S3 costs: comment this if not used!
     s3_local_manager.upload_onnx_slices()

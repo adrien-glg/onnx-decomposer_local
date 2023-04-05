@@ -6,6 +6,11 @@ from src.jsonmanager import json_manager
 
 
 def get_results(input_file):
+    """
+    Computes and returns the results of the first slice execution.
+    :param input_file: Model input data, such as an image for image classification.
+    :return: Computed results for the first slice.
+    """
     model_slice0_path = model_extractor.get_slice_path(0)
 
     session = onnxruntime.InferenceSession(model_slice0_path)
@@ -15,6 +20,13 @@ def get_results(input_file):
 
 
 def run(input_file, input_lists, output_lists):
+    """
+    Computes the results (payloads) of the first slice execution, and saves each of them in a separate JSON file.
+    Makes the input event for the following slice execution.
+    :param input_file: Model input data, such as an image for image classification.
+    :param input_lists: List of the matching inputs for each slice.
+    :param output_lists: List of the matching output for each slice.
+    """
     slice_index = 0
     results = get_results(input_file)
 

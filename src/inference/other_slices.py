@@ -6,6 +6,11 @@ from src.jsonmanager import json_manager
 
 
 def get_payload(input_key):
+    """
+    Returns the payload data related to the specified input key.
+    :param input_key: Name of the input for which we want the payload data.
+    :return: Payload data
+    """
     payload = json_manager.get_payload_data(input_key)
     final_payload = np.asarray(payload, dtype=np.float32)
 
@@ -13,6 +18,12 @@ def get_payload(input_key):
 
 
 def get_results(slice_index, input_lists):
+    """
+    Computes and returns the results of the execution with the specified slice.
+    :param slice_index: Index of the slice for which we want to compute the results.
+    :param input_lists: List of the matching inputs for each slice.
+    :return: Computed results for the specified slice.
+    """
     model_slice_path = model_extractor.get_slice_path(slice_index)
     input_feed = {}
 
@@ -28,6 +39,13 @@ def get_results(slice_index, input_lists):
 
 
 def run(slice_index, input_lists, output_lists):
+    """
+    Computes the results (payloads) of the specified slice execution, and saves each of them in a separate JSON file.
+    Makes the input event for the following slice execution.
+    :param slice_index: Index of the slice for which we want to compute the results.
+    :param input_lists: List of the matching inputs for each slice.
+    :param output_lists: List of the matching output for each slice.
+    """
     results = get_results(slice_index, input_lists)
 
     for i in range(len(results)):

@@ -60,7 +60,7 @@ def get_built_lists():
     Creates the input and output lists required by each slice of the ONNX model. These lists depend on the slicing
     pattern selected, i.e., the chosen number of slices.
     :return: List of the matching inputs for each slice and list of the matching output for each slice (possibly
-    multiple inputs per slice, but always one output per slice)
+    multiple inputs per slice, but always one output per slice).
     """
     print("PROJECT: " + constants.PROJECT_NAME + ", " + str(constants.NUMBER_OF_SLICES) + " slices\n")
     input_lists, output_lists, past_outputs = [], [], []

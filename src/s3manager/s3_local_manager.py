@@ -7,6 +7,10 @@ s3 = boto3.client('s3')
 
 
 def get_buckets_list():
+    """
+    Returns the list of your AWS S3 buckets.
+    :return: List of buckets.
+    """
     buckets = s3.list_buckets()['Buckets']
     buckets_list = []
     for i in range(len(buckets)):
@@ -15,6 +19,9 @@ def get_buckets_list():
 
 
 def create_bucket():
+    """
+    Creates the AWS S3 bucket specified in the project configuration file, if it does not already exist.
+    """
     buckets_list = get_buckets_list()
     bucket = constants.S3_BUCKET
     if bucket not in buckets_list:
@@ -22,6 +29,9 @@ def create_bucket():
 
 
 def upload_onnx_slices():
+    """
+    Uploads the ONNX slices from the immediate past execution to the AWS S3 bucket.
+    """
     create_bucket()
     for slice_index in range(constants.NUMBER_OF_SLICES):
         model_slice_path = model_extractor.get_slice_path(slice_index)

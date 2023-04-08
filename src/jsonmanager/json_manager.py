@@ -152,7 +152,7 @@ def get_event_path(slice_index):
 
 def make_event(slice_index, input_lists, output_lists):
     """
-    Creates an event and stores it in a JSON file.
+    Creates an event and stores it to a JSON file.
     :param slice_index: Index of the slice.
     :param input_lists: List of the matching inputs for each slice.
     :param output_lists: List of the matching output for each slice.
@@ -169,6 +169,12 @@ def make_event(slice_index, input_lists, output_lists):
 
 
 def make_and_export_event(slice_index, input_lists, output_lists):
+    """
+    Creates an event, stores it to a JSON file, and exports it the events location of the AWS project
+    :param slice_index: Index of the slice.
+    :param input_lists: List of the matching inputs for each slice.
+    :param output_lists: List of the matching output for each slice.
+    """
     make_event(slice_index, input_lists, output_lists)
     shutil.copy(get_event_path(slice_index), constants.EVENT_COPY_PATH)
     print("event0.json created and exported successfully")

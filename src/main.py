@@ -10,7 +10,7 @@ project_steps = importlib.import_module(constants.PROJECT_STEPS_MODULE, package=
 
 if __name__ == '__main__':
 
-    # Delete remaining files from previous executions
+    # Delete the remaining files from previous executions
     cleaner.purge()
 
     # Decompose the ONNX model in multiple slices
@@ -32,5 +32,5 @@ if __name__ == '__main__':
     # Print the results
     result_printer.print_result()
 
-    # Upload ONNX slices to AWS S3 for future AWS executions
+    # Upload the ONNX slices to AWS S3 for future AWS executions
     s3_local_manager.upload_onnx_slices()  # if not used: comment this line to save S3 costs

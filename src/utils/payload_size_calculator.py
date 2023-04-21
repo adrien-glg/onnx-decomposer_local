@@ -6,21 +6,21 @@ from src import constants
 
 
 # FUNCTION TO BE USED WITH MAIN_ALL_PAYLOADS.PY ONLY
-def get_all_payloads_sizes(outputs):
-    payloads_sizes = []
+def get_all_payload_sizes(outputs):
+    payload_sizes = []
     outputs = outputs[0]
 
     for payload_index in range(len(outputs)):
         payload_path = os.path.splitext(onnxmanager.JSON_PAYLOAD_PATH)[0] + "0_" + str(payload_index) + \
                        os.path.splitext(onnxmanager.JSON_PAYLOAD_PATH)[1]
         payload_size = os.path.getsize(payload_path)
-        payloads_sizes += [payload_size]
+        payload_sizes += [payload_size]
 
-    return payloads_sizes
+    return payload_sizes
 
 
-def get_payloads_sizes():
-    payloads_sizes_per_slice = []
+def get_payload_sizes():
+    payload_sizes_per_slice = []
 
     for slice_index in range(constants.NUMBER_OF_SLICES):
         slice_payload_size = 0
@@ -29,6 +29,6 @@ def get_payloads_sizes():
         for i in range(len(slice_payloads)):
             payload_size = os.path.getsize(slice_payloads[i])
             slice_payload_size += payload_size
-        payloads_sizes_per_slice += [slice_payload_size]
+        payload_sizes_per_slice += [slice_payload_size]
 
-    return payloads_sizes_per_slice
+    return payload_sizes_per_slice

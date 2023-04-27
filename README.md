@@ -9,7 +9,7 @@ First, you need to configure the following file as needed:
 - `projects/<projectname>/<projectname>_config.ini`
 - `projects/<projectname>/<projectname>_steps.py`
 
-## Execution
+## Decomposition and inference
 
 To be safe, it is recommended to use a Python Virtual Environment (venv): `python3 -m venv venv`
 
@@ -27,9 +27,17 @@ export PYTHONPATH=$PYTHONPATH:"$PWD":"$PWD/src"
 cd src
 ```
 
-Start the execution:
+Start the decomposition and inference:
 ```bash
 python3 main.py
+```
+
+## Conformity checks
+
+To check the temporary storage size violation, we need to check the maximum slice size:
+```bash
+cd conformity_checks
+python3 check_maximum_slice_size.py
 ```
 
 ## AWS-related steps

@@ -1,14 +1,17 @@
+import os
 import sys
 
 from inference import first_slice, other_slices
 from jsonmanager import json_manager
+from src import onnxmanager
 from onnxmanager import lists_builder, model_extractor, model_adjuster
 from src.utils import cleaner, result_printer
 from src.s3manager import s3_local_manager
-from src.utils import size_helper, payload_size_calculator
+from src.utils import size_helper, payload_size_calculator, max_slice_size_checker
 from src import constants
 
 import importlib
+
 project_steps = importlib.import_module(constants.PROJECT_STEPS_MODULE, package=None)
 
 
@@ -39,31 +42,33 @@ def run():
     # s3_local_manager.upload_onnx_slices()  # if not used: comment this line to save S3 costs
 
 
-def print_payload_sizes():
-    payload_sizes = payload_size_calculator.get_payload_sizes()
-    pretty_payload_sizes = size_helper.get_pretty_sizes(payload_sizes)
-    print("\nVIRTUAL PAYLOAD SIZES PER SLICE:")
-    print(pretty_payload_sizes)
-    # print(payload_sizes)
+def max_slice_size_mode():
+    if not os.listdir(onnxmanager.SLICES_PATH):
+        print("First, you need to run an execution with the 'exec' mode")
+    max_slice_size_checker.print_max_slice_size()
+
+
+def payloads_mode():
+    if not os.listdir(onnxmanager.JSON_ROOT_PATH):
+        print("First, you need to run an execution with the 'exec' mode")
+    payload_size_calculator.print_payload_sizes()
 
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
-        option = sys.argv[1]
+        mode = sys.argv[1]
     else:
-        option = "simple"
+        mode = "exec"
 
-    if option == "simple":
+    if mode == "exec":
+        print("EXECUTION MODE\n")
         run()
 
-    if option == "payloads":
-        run()
-        print_payload_sizes()
+    if mode == "max_slice_size":
+        print("MAXIMUM SLICE SIZE MODE\n")
+        max_slice_size_mode()
 
-
-
-
-
-
-
+    if mode == "payloads":
+        print("PAYLOADS MODE\n")
+        payloads_mode()
 

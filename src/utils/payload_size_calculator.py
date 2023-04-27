@@ -3,6 +3,7 @@ import glob
 
 from src import onnxmanager
 from src import constants
+from src.utils import size_helper
 
 
 # FUNCTION TO BE USED WITH MAIN_ALL_PAYLOADS.PY ONLY
@@ -32,3 +33,11 @@ def get_payload_sizes():
         payload_sizes_per_slice += [slice_payload_size]
 
     return payload_sizes_per_slice
+
+
+def print_payload_sizes():
+    payload_sizes = get_payload_sizes()
+    pretty_payload_sizes = size_helper.get_pretty_sizes(payload_sizes)
+    print("VIRTUAL PAYLOAD SIZES PER SLICE:")
+    for i in range(len(pretty_payload_sizes)):
+        print("Slice " + str(i) + ": " + pretty_payload_sizes[i])

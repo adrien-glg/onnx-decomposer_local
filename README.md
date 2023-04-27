@@ -36,8 +36,7 @@ python3 main.py
 
 To check the temporary storage size violation, we need to check the maximum slice size:
 ```bash
-cd conformity_checks
-python3 check_maximum_slice_size.py
+# TODO
 ```
 
 ## AWS-related steps

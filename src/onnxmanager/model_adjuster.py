@@ -1,6 +1,7 @@
 import numpy as np
 import onnx
 
+from src import onnxmanager
 from src.onnxmanager import model_extractor
 from src import constants
 
@@ -52,4 +53,19 @@ def adjust_slices(input_lists, output_lists):
 
     print("Slices adjusted successfully")
     return new_output_lists
+
+
+def add_all_model_outputs(outputs):
+    """
+    # TODO
+    # THIS IS ONLY FOR THE "PAYLOADS PER LAYER" MODE
+    :return:
+    """
+    print("Adding all model outputs...")
+    print("This can take several minutes, please wait...")
+    model = onnx.load(onnxmanager.MODEL_PATH)
+    modified_model_path = model_extractor.get_slice_path(0)
+    for i in range(len(outputs[0])):
+        add_model_output(model, modified_model_path, outputs[0][i])
+
 

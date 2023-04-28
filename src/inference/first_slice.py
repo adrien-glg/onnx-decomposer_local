@@ -38,3 +38,23 @@ def run(input_file, input_lists, output_lists):
     json_manager.make_event(slice_index + 1, input_lists, output_lists)  # only locally, not for AWS
 
     print("Slice 0: execution completed successfully")
+
+
+def run(input_file):
+    """
+    Computes the results (payloads) of the first slice execution, and saves each of them in a separate JSON file.
+    Makes the input event for the following slice execution.
+    :param input_file: Model input data, such as an image for image classification.
+    """
+    slice_index = 0
+    results = get_results(input_file)
+    input_lists, output_lists = json_manager.get_inputs_outputs_from_event(slice_index)
+
+    for i in range(len(results)):
+        result = results[i]
+        json_manager.payload_to_jsonfile(slice_index, output_lists[0][i], result)
+
+    json_manager.set_next_payload_index(0)
+    json_manager.make_event(slice_index + 1, input_lists, output_lists)  # only locally, not for AWS
+
+    print("\nSlice 0: execution completed successfully")

@@ -38,14 +38,13 @@ def get_results(slice_index, input_lists):
     return results
 
 
-def run(slice_index, input_lists, output_lists):
+def run(slice_index):
     """
     Computes the results (payloads) of the specified slice execution, and saves each of them in a separate JSON file.
     Makes the input event for the following slice execution.
     :param slice_index: Index of the slice for which we want to compute the results.
-    :param input_lists: List of the matching inputs for each slice.
-    :param output_lists: List of the matching output for each slice.
     """
+    input_lists, output_lists = json_manager.get_inputs_outputs_from_event(slice_index)
     results = get_results(slice_index, input_lists)
 
     for i in range(len(results)):

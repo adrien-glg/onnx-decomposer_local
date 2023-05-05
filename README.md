@@ -29,7 +29,7 @@ cd src
 
 Start the decomposition and inference:
 ```bash
-python3 main.py
+python3 main.py  # TODO talk about the different modes
 ```
 
 ## Conformity checks

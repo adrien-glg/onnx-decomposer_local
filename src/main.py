@@ -31,6 +31,9 @@ def run_decomposition(selected_mode):
     # Create the first event (only to prepare a future execution with AWS)
     json_manager.make_and_export_event(0, inputs, outputs)
 
+    # Upload the ONNX slices to AWS S3 for future AWS executions
+    s3_local_manager.upload_onnx_slices()  # if not used: comment this line to save S3 costs
+
 
 def run_inference():
     # Load the input data
@@ -43,9 +46,6 @@ def run_inference():
 
     # Print the results
     result_printer.print_result()
-
-    # Upload the ONNX slices to AWS S3 for future AWS executions
-    # s3_local_manager.upload_onnx_slices()  # if not used: comment this line to save S3 costs
 
 
 def max_slice_size_mode():

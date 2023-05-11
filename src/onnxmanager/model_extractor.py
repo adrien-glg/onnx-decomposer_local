@@ -1,4 +1,5 @@
 import os
+import shutil
 import onnx
 
 from src import constants
@@ -44,7 +45,11 @@ def extract_model_slices(input_lists, output_lists):
     :param input_lists: List of the inputs of each slice we want to extract.
     :param output_lists: List of the outputs of each slice we want to extract.
     """
-    for slice_index in range(constants.NUMBER_OF_SLICES):
-        model_slice_path = get_slice_path(slice_index)
-        extract_slice(model_slice_path, input_lists[slice_index], output_lists[slice_index])
-        print("Slice " + str(slice_index) + " extracted successfully")
+    print("Extracting slices...")
+    if constants.NUMBER_OF_SLICES == 1:
+        shutil.copy(onnxmanager.MODEL_PATH, get_slice_path(0))
+    else:
+        for slice_index in range(constants.NUMBER_OF_SLICES):
+            model_slice_path = get_slice_path(slice_index)
+            extract_slice(model_slice_path, input_lists[slice_index], output_lists[slice_index])
+            print("Slice " + str(slice_index) + " extracted successfully")

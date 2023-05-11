@@ -1,7 +1,8 @@
 import numpy as np
+from PIL import Image
+
 from src import onnxmanager
 from src.jsonmanager import json_manager
-from PIL import Image
 
 
 def get_preprocessed_input():

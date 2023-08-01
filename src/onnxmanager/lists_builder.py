@@ -63,7 +63,6 @@ def get_built_lists():
     :return: List of the matching inputs for each slice and list of the matching output for each slice (possibly
     multiple inputs per slice, but always one output per slice).
     """
-    print("PROJECT: " + constants.PROJECT_NAME + ", " + str(constants.NUMBER_OF_SLICES) + " slice(s)\n")
     input_lists, output_lists, past_outputs = [], [], []
     model = onnx.load(onnxmanager.MODEL_PATH)
     nodes = model.graph.node
@@ -100,5 +99,5 @@ def get_built_lists():
 
     input_lists[0] = constants.INPUT_LIST_START
 
-    print("Lists built successfully")
+    print("Built lists successfully")
     return input_lists, output_lists

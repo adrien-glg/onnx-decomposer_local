@@ -1,5 +1,4 @@
 import os
-import sys
 import argparse
 
 from inference import first_slice, other_slices
@@ -56,19 +55,18 @@ def max_slice_size_mode():
 
 
 def payloads_per_layer_mode():
-    if not os.listdir(onnxmanager.JSON_ROOT_PATH):
-        print("First, you need to run an execution with the 'inference' mode")
-        exit(1)
     if not constants.NUMBER_OF_SLICES == 1:
         print("For this mode to complete, you need to set NUMBER_OF_SLICES = 1")
         exit(1)
     run_decomposition("payloads_per_layer")
+    run_inference()
     payload_size_calculator.print_all_payload_sizes()
 
 
 def payloads_per_slice_mode():
-    if not os.listdir(onnxmanager.JSON_ROOT_PATH):
+    if not os.path.exists(onnxmanager.DICTIONARY_PATH):
         print("First, you need to run an execution with the 'inference' mode")
+        exit(1)
     payload_size_calculator.print_payload_sizes()
 
 
@@ -82,14 +80,15 @@ if __name__ == '__main__':
                         help='Choose one of the available modes: basic, decomposition, inference, max_slice_size,'
                              'payloads_per_layer, or payloads_per_slice')
     mode = parser.parse_args().mode
+    print("PROJECT: " + constants.PROJECT_NAME + ", " + str(constants.NUMBER_OF_SLICES) + " slice(s)\n")
     if mode == "basic":
         print("MODE: BASIC (DECOMPOSITION AND INFERENCE)\n")
         run_decomposition(mode)
         run_inference()
-    if mode == "decomposition":
+    elif mode == "decomposition":
         print("MODE: DECOMPOSITION\n")
         run_decomposition(mode)
-    if mode == "inference":
+    elif mode == "inference":
         print("MODE: INFERENCE")
         run_inference()
     elif mode == "payloads_per_layer":

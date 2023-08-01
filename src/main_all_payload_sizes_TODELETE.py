@@ -34,15 +34,16 @@ if __name__ == '__main__':
     json_manager.make_and_export_event(0, inputs, outputs)
 
     img = project_steps.get_preprocessed_input()
-    first_slice.run(img, inputs, outputs)
+    first_slice.run(img)
 
     # Print the results
     result_printer.print_result()
 
     # PAYLOAD SIZES
-    print("\nALL PAYLOAD SIZES:")
-    payload_sizes = payload_size_calculator.get_all_payload_sizes(outputs)
+    # print("\nALL PAYLOAD SIZES:")
+    # payload_sizes = payload_size_calculator.get_all_payload_sizes()
     # print(payload_sizes)
+    # pretty_payload_sizes = size_helper.get_pretty_sizes(payload_sizes)
+    # print(pretty_payload_sizes)
+    payload_size_calculator.print_all_payload_sizes()
 
-    pretty_payload_sizes = size_helper.get_pretty_sizes(payload_sizes)
-    print(pretty_payload_sizes)

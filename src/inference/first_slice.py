@@ -57,4 +57,4 @@ def run(input_file):
     json_manager.set_next_payload_index(0)
     json_manager.make_event(slice_index + 1, input_lists, output_lists)  # only locally, not for AWS
 
-    print("\nSlice 0: execution completed successfully")
+    print("\nSlice 0: completed execution successfully")

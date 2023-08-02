@@ -177,8 +177,8 @@ def make_and_export_event(slice_index, input_lists, output_lists):
     """
     make_event(slice_index, input_lists, output_lists)
     shutil.copy(get_event_path(slice_index), constants.EVENT_COPY_PATH)
-    print("Created and exported event0.json successfully")
-    print("\nDecomposition successful")
+    print("Created and exported first event successfully")
+    print("Decomposition successful\n")
 
 
 def get_inputs_outputs_from_event(slice_index):

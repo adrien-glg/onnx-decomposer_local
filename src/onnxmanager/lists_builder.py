@@ -99,5 +99,5 @@ def get_built_lists():
 
     input_lists[0] = constants.INPUT_LIST_START
 
-    print("Built lists successfully")
+    print("Built input/output lists successfully")
     return input_lists, output_lists

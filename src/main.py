@@ -1,20 +1,22 @@
 import os
 import argparse
+from memory_profiler import profile
 
 from inference import first_slice, other_slices
 from jsonmanager import json_manager
 from src import onnxmanager
 from onnxmanager import lists_builder, model_extractor, model_adjuster
-from src.utils import cleaner, result_printer, payload_size_calculator, max_slice_size_checker
+from src.utils import cleaner, result_printer, payload_size_calculator, max_slice_size_checker, slice_checker
 from src.s3manager import s3_local_manager
 from src import constants
 
 import importlib
-
 project_steps = importlib.import_module(constants.PROJECT_STEPS_MODULE, package=None)
 
 
 def run_decomposition(selected_mode):
+    print("Starting decomposition:")
+
     # Delete the remaining files from previous executions
     cleaner.purge()
 
@@ -35,6 +37,12 @@ def run_decomposition(selected_mode):
 
 
 def run_inference():
+    if not slice_checker.valid_number_of_slices():
+        print("First, you need to run a decomposition in slices with the 'decomposition' mode")
+        exit(1)
+
+    print("Starting inference:")
+
     # Load the input data
     img = project_steps.get_preprocessed_input()
 
@@ -70,15 +78,20 @@ def payloads_per_slice_mode():
     payload_size_calculator.print_payload_sizes()
 
 
+@profile
+def memory_mode():
+    run_inference()
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         prog='main.py',
         description='This program can perform the model decomposition, the inference, and certain conformity checks',
         epilog='Text at the bottom of help')  # TODO
     parser.add_argument('mode', choices=['basic', 'decomposition', 'inference', 'max_slice_size', 'payloads_per_layer',
-                                         'payloads_per_slice'],
+                                         'payloads_per_slice', 'memory'],
                         help='Choose one of the available modes: basic, decomposition, inference, max_slice_size,'
-                             'payloads_per_layer, or payloads_per_slice')
+                             'payloads_per_layer, payloads_per_slice, memory')
     mode = parser.parse_args().mode
     print("PROJECT: " + constants.PROJECT_NAME + ", " + str(constants.NUMBER_OF_SLICES) + " slice(s)\n")
     if mode == "basic":
@@ -100,3 +113,6 @@ if __name__ == '__main__':
     elif mode == "payloads_per_slice":
         print("MODE: PAYLOADS PER SLICE\n")
         payloads_per_slice_mode()
+    elif mode == "memory":
+        print("MODE: MEMORY\n")
+        memory_mode()

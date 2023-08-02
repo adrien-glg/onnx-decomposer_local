@@ -1,17 +1,17 @@
 ## Preliminaries
 
+Move to the directory with the name of your project (create the directory if needed), containing the Jupyter Notebook
+and the ML model:
 ```bash
 cd projects/<projectname>
 ```
 
-## Convert Jupyter Notebook to Python
-
+Convert the Jupyter Notebook to Python:
 ```bash
 jupyter nbconvert --to python <jupyter_notebook.ipynb>
 ```
 
-## Convert model to ONNX format
-
+Convert the model to ONNX format:
 ```bash
 python3 <projectname>_onnx_conversion.py
 ```

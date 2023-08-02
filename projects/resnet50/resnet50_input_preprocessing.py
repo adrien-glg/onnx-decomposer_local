@@ -3,8 +3,7 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.resnet50 import preprocess_input
 import numpy as np
 
-import preliminaries_constants as plm_constants
-
+from projects import preliminaries_constants as plm_constants
 
 img = image.load_img(plm_constants.INPUT_PATH, target_size=(224, 224))
 

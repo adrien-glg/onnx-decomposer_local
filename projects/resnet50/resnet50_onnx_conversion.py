@@ -4,8 +4,7 @@ import tensorflow as tf
 from tensorflow.keras.applications.resnet50 import ResNet50
 import tf2onnx
 
-import preliminaries_constants as plm_constants
-
+from projects import preliminaries_constants as plm_constants
 
 tensorflow_model_path = pathlib.Path(plm_constants.TENSORFLOW_MODEL_PATH)
 

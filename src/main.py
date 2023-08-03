@@ -22,7 +22,7 @@ def run_decomposition(selected_mode):
 
     # Decompose the ONNX model in multiple slices
     inputs, outputs = lists_builder.get_built_lists()
-    if selected_mode == "payloads_per_layer":
+    if selected_mode == "payload_per_layer":
         outputs = lists_builder.get_all_outputs()
         model_adjuster.add_all_model_outputs(outputs)
     else:
@@ -62,16 +62,16 @@ def max_slice_size_mode():
     max_slice_size_checker.print_max_slice_size()
 
 
-def payloads_per_layer_mode():
+def payload_per_layer_mode():
     if not constants.NUMBER_OF_SLICES == 1:
         print("For this mode to complete, you need to set NUMBER_OF_SLICES = 1")
         exit(1)
-    run_decomposition("payloads_per_layer")
+    run_decomposition("payload_per_layer")
     run_inference()
     payload_size_calculator.print_all_payload_sizes()
 
 
-def payloads_per_slice_mode():
+def payload_per_slice_mode():
     if not os.path.exists(onnxmanager.DICTIONARY_PATH):
         print("First, you need to run an execution with the 'inference' mode")
         exit(1)
@@ -88,10 +88,10 @@ if __name__ == '__main__':
         prog='main.py',
         description='This program can perform the model decomposition, the inference, and certain conformity checks',
         epilog='Text at the bottom of help')  # TODO
-    parser.add_argument('mode', choices=['basic', 'decomposition', 'inference', 'max_slice_size', 'payloads_per_layer',
-                                         'payloads_per_slice', 'memory'],
+    parser.add_argument('mode', choices=['basic', 'decomposition', 'inference', 'max_slice_size', 'payload_per_layer',
+                                         'payload_per_slice', 'memory'],
                         help='Choose one of the available modes: basic, decomposition, inference, max_slice_size,'
-                             'payloads_per_layer, payloads_per_slice, memory')
+                             'payload_per_layer, payload_per_slice, memory')
     mode = parser.parse_args().mode
     print("PROJECT: " + constants.PROJECT_NAME + ", " + str(constants.NUMBER_OF_SLICES) + " slice(s)\n")
     if mode == "basic":
@@ -104,15 +104,15 @@ if __name__ == '__main__':
     elif mode == "inference":
         print("MODE: INFERENCE")
         run_inference()
-    elif mode == "payloads_per_layer":
-        print("MODE: PAYLOADS PER LAYER\n")
-        payloads_per_layer_mode()
+    elif mode == "payload_per_layer":
+        print("MODE: PAYLOAD PER LAYER\n")
+        payload_per_layer_mode()
     elif mode == "max_slice_size":
         print("MODE: MAXIMUM SLICE SIZE\n")
         max_slice_size_mode()
-    elif mode == "payloads_per_slice":
-        print("MODE: PAYLOADS PER SLICE\n")
-        payloads_per_slice_mode()
+    elif mode == "payload_per_slice":
+        print("MODE: PAYLOAD PER SLICE\n")
+        payload_per_slice_mode()
     elif mode == "memory":
         print("MODE: MEMORY\n")
         memory_mode()

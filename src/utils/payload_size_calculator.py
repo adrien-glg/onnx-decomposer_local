@@ -46,7 +46,7 @@ def get_all_payload_sizes():
     return payload_sizes
 
 
-# PAYLOADS PER SLICE:
+# PAYLOAD PER SLICE:
 def print_payload_sizes():
     payload_sizes = get_payload_sizes()
     slice_indices = [i for i, x in sorted(enumerate(payload_sizes), key=lambda x: x[1])]
@@ -58,7 +58,7 @@ def print_payload_sizes():
         print("Slice " + str(slice_indices[i]) + ": " + pretty_payload_sizes[i])
 
 
-# PAYLOADS PER LAYER:
+# PAYLOAD PER LAYER:
 def print_all_payload_sizes():
     payload_sizes = get_all_payload_sizes()
     slice_indices = [i for i, x in sorted(enumerate(payload_sizes), key=lambda x: x[1])]

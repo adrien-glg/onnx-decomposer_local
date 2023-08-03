@@ -1,5 +1,10 @@
 ## Preliminaries
 
+The preliminaries involve 3 main steps:
+- Converting the Jupyter notebook to Python
+- Converting the ML model to ONNX format
+- If needed, converting the input file to a supported format
+
 From the `root` of the project (`onnx-decomposer_local` folder):    
 
 Configure the file `general_config.ini` with the name of the project.
@@ -21,7 +26,7 @@ Convert the Jupyter notebook to Python:
 jupyter nbconvert --to python <jupyter_notebook.ipynb>
 ```
 
-Convert the model to ONNX format:
+Convert the ML model to ONNX format:
 ```bash
 python3 <projectname>_onnx_conversion.py
 ```

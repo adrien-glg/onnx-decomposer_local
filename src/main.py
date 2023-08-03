@@ -56,8 +56,8 @@ def run_inference():
 
 
 def max_slice_size_mode():
-    if not os.listdir(onnxmanager.SLICES_PATH):
-        print("First, you need to run an execution with the 'inference' mode")
+    if not slice_checker.valid_number_of_slices():
+        print("First, you need to run a decomposition in slices with the 'decomposition' mode")
         exit(1)
     max_slice_size_checker.print_max_slice_size()
 
@@ -72,7 +72,10 @@ def payload_per_layer_mode():
 
 
 def payload_per_slice_mode():
-    if not os.path.exists(onnxmanager.DICTIONARY_PATH):
+    if not slice_checker.valid_number_of_slices():
+        print("First, you need to run a decomposition in slices and an inference with the 'basic' mode")
+        exit(1)
+    elif not os.path.exists(onnxmanager.DICTIONARY_PATH):
         print("First, you need to run an execution with the 'inference' mode")
         exit(1)
     payload_size_calculator.print_payload_sizes()
@@ -86,7 +89,8 @@ def memory_mode():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         prog='main.py',
-        description='This program can perform the model decomposition, the inference, and certain conformity checks',
+        description='This program can perform the model decomposition, the inference, and all the conformity checks '
+                    'except the deployment package size check',
         epilog='Text at the bottom of help')  # TODO
     parser.add_argument('mode', choices=['basic', 'decomposition', 'inference', 'max_slice_size', 'payload_per_layer',
                                          'payload_per_slice', 'memory'],

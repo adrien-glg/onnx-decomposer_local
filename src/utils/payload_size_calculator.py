@@ -55,7 +55,7 @@ def print_payload_sizes():
     pretty_payload_sizes = size_helper.get_pretty_sizes(payload_sizes)
     print("VIRTUAL PAYLOAD SIZE PER SLICE (SORTED):")
     for i in range(len(pretty_payload_sizes)):
-        print("Slice " + str(slice_indices[i]) + ": " + pretty_payload_sizes[i])
+        print("Slice " + str(slice_indices[i] + 1) + ": " + pretty_payload_sizes[i])
 
 
 # PAYLOAD PER LAYER:
@@ -67,7 +67,7 @@ def print_all_payload_sizes():
     pretty_payload_sizes = size_helper.get_pretty_sizes(payload_sizes)
     print("\nPAYLOAD SIZE PER LAYER (SORTED):")
     for i in range(len(pretty_payload_sizes)):
-        print("Layer " + str(slice_indices[i]) + ": " + pretty_payload_sizes[i])
+        print("Layer " + str(slice_indices[i] + 1) + ": " + pretty_payload_sizes[i])
 
 
 

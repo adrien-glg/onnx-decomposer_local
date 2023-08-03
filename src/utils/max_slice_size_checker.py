@@ -25,4 +25,4 @@ def print_max_slice_size():
     max_slice_size, max_slice_index = get_maximum_slice_size()
     pretty_max_slice_size = size_helper.get_pretty_size(max_slice_size)
     print("MAXIMUM SLICE SIZE:")
-    print(pretty_max_slice_size + " (" + str(max_slice_size) + " bytes) (Slice " + str(max_slice_index) + ")")
+    print(pretty_max_slice_size + " (" + str(max_slice_size) + " bytes) (Slice " + str(max_slice_index + 1) + ")")

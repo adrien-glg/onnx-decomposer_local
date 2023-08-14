@@ -46,11 +46,11 @@ def upload_onnx_slices():
     """
     Uploads the ONNX slices from the immediate past execution to the AWS S3 bucket.
     """
-    print("\nUploading slices to S3...")
+    print("Uploading slices to S3...")
     create_bucket()
     delete_onnx_slices()
     for slice_index in range(constants.NUMBER_OF_SLICES):
         model_slice_path = model_extractor.get_slice_path(slice_index)
         model_slice_path_s3 = model_extractor.get_slice_path_s3(slice_index)
         s3.upload_file(model_slice_path, constants.S3_BUCKET, model_slice_path_s3)
-    print("Slices successfully uploaded to S3")
+    print("Uploaded slices successfully\n")

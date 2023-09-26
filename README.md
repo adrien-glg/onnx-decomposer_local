@@ -2,7 +2,7 @@
 
 If needed, perform the preliminary steps first: [README_preliminaries.md](README_preliminaries.md)
 
-## Init Configuration
+## Initial configuration
 
 If not already done, configure the following files as needed:
 - `general_config.ini`

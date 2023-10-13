@@ -28,7 +28,6 @@ that our decomposition method enables running ML inference on Serverless, regard
 benefiting from the high scalability of this architecture while lowering the strain on computing resources
 such as required runtime memory.
 
-
 ## Initial Configuration
 
 If needed, perform the preliminary steps first: [README_preliminaries.md](README_preliminaries.md)

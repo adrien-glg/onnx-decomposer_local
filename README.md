@@ -1,8 +1,37 @@
-# onnx-decomposer_local
+# ONNX Decomposer (Local)
+
+**ONNX Decomposer for the Deployment of Machine Learning Models on Serverless**
+
+This project is divided into two repositories: 
+- [onnx-decomposer_local](https://github.com/adrien-glg/onnx-decomposer_local) for local inference
+- [onnx-decomposer_aws](https://github.com/adrien-glg/onnx-decomposer_aws) for Serverless inference on AWS
+
+This is part of a Software Engineering Master's Thesis, carried out at the University of Amsterdam. You will find all the details about this project in the [Thesis Report](https://dspace.uba.uva.nl/bitstreams/7b31ef71-cf20-4396-9c27-56f86f0b7f55/download).
+
+## Thesis Abstract
+
+In recent years, Serverless computing has emerged as a persuasive paradigm aiming to reshape the cloud
+computing landscape considerably. Serverless offers a scalable and cost-effective deployment model where
+users can run applications without the need to manage or provision servers. The underlying infrastructure
+is entirely abstracted and has the ability to scale automatically in a flexible manner, while the users are
+charged exclusively for the resources they use. In parallel, we have witnessed a surge in the adoption
+of Artificial Intelligence and Machine Learning (ML) technologies in various application domains. Since
+Serverless architectures are not tailored to address the unique challenges posed by resource-intensive
+jobs, combining ML with Serverless proves to be a complex undertaking.    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In this thesis, we propose a solution for deploying ML models on Serverless platforms, specifically for
+inference jobs. Our model-agnostic approach is based on a flexible decomposition of such models into sub-models,
+referred to as slices, and the execution of inferences in a workflow of Serverless functions. We rely
+on conducting a thorough investigation of the limitations affecting the most popular Serverless platforms
+on the market and devising strategies to overcome them. Our experimental evaluations are performed
+on AWS, considering the ONNX open source format for ML model representation. Our results show
+that our decomposition method enables running ML inference on Serverless, regardless of the model size,
+benefiting from the high scalability of this architecture while lowering the strain on computing resources
+such as required runtime memory.
+
+
+## Initial Configuration
 
 If needed, perform the preliminary steps first: [README_preliminaries.md](README_preliminaries.md)
-
-## Init Configuration
 
 If not already done, configure the following files as needed:
 - `general_config.ini`
@@ -78,6 +107,3 @@ and the name of the S3 bucket.
 
 This project includes code and content from the following sources:
 - [tensorflow-onnx](https://github.com/onnx/tensorflow-onnx/)
-```bash
-# TODO add other references
-```

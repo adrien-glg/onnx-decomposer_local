@@ -6,7 +6,7 @@ This project is divided into two repositories:
 - [onnx-decomposer_local](https://github.com/adrien-glg/onnx-decomposer_local) for local inference
 - [onnx-decomposer_aws](https://github.com/adrien-glg/onnx-decomposer_aws) for Serverless inference on AWS
 
-This is part of a Software Engineering Master's Thesis, carried out at the University of Amsterdam. You will find all the details about this project in the [Thesis Report](https://dspace.uba.uva.nl/bitstreams/7b31ef71-cf20-4396-9c27-56f86f0b7f55/download).
+This is part of a Software Engineering Master's Thesis, carried out at the University of Amsterdam (UvA). You will find all the details about this project in the [Thesis Report](https://dspace.uba.uva.nl/bitstreams/7b31ef71-cf20-4396-9c27-56f86f0b7f55/download).
 
 ## Thesis Abstract
 
